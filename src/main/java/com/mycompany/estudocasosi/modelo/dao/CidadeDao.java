@@ -4,6 +4,7 @@
  */
 package com.mycompany.estudocasosi.modelo.dao;
 
+import com.mycompany.estudocasosi.modelo.entidade.Cidade;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
