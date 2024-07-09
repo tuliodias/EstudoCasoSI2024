@@ -3,7 +3,7 @@
     Created on : 8 de jul. de 2024, 21:42:09
     Author     : tulio
 --%>
-<%@include file="Menu.jsp" %>
+<%@include file="menu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
