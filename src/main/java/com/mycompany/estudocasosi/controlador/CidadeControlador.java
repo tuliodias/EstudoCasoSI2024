@@ -50,6 +50,8 @@ public class CidadeControlador extends HttpServlet {
                 case "cadastrar":  cadastrar(request, response); break;
                 case "editar":  editar(request, response); break;
                 case "confirmarEditar":  confirmarEditar(request, response); break;
+                case "excluir":  excluir(request, response); break;
+                case "confirmarExcluir":  confirmarExcluir(request, response); break;
                 case "cancelar":  cancelar(request, response); break;
                 default:
                     throw new IllegalArgumentException("Opção inválida"+opcao);
@@ -78,12 +80,27 @@ public class CidadeControlador extends HttpServlet {
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
+    private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("codigoCidade", codigoCidade);
+        request.setAttribute("opcao", "confirmarExcluir");
+        request.setAttribute("nomeCidade", nomeCidade);
+        request.setAttribute("ufCidade", ufCidade);
+        request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
+        encaminharParaPagina(request, response);
+    }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
         cidade.setNomeCidade(nomeCidade);
         cidade.setUfCidade(ufCidade);
         cidadeDao.alterar(cidade);
+        cancelar(request, response);
+    }
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
+        cidade.setNomeCidade(nomeCidade);
+        cidade.setUfCidade(ufCidade);
+        cidadeDao.excluir(cidade);
         cancelar(request, response);
     }
 

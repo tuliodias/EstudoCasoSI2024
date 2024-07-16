@@ -23,6 +23,7 @@
             <input type="submit" value="Salvar" name="Salvar" />
             <input type="submit" value="Cancelar" name="Cancelar" />
         </form>
+            
 
         <table border="1">
             <c:if test="${not empty cidades}">
@@ -30,6 +31,8 @@
                 <th>Código</th>
                 <th>Cidade</th>
                 <th>Uf</th>
+                <th>Alterar</th>
+                <th>Excluir</th>
             </tr> 
             </c:if>
 
