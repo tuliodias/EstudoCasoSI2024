@@ -25,17 +25,37 @@
         </form>
 
         <table border="1">
+            <c:if test="${not empty cidades}">
             <tr>
                 <th>Código</th>
                 <th>Cidade</th>
                 <th>Uf</th>
             </tr> 
+            </c:if>
 
             <c:forEach var="cidade" items="${cidades}">
                 <tr>
                     <td>${cidade.codigoCidade}</td>
                     <td>${cidade.nomeCidade}</td>
                     <td>${cidade.ufCidade}</td>
+                    <td>
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
+                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
+                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                            <input type="hidden" name="opcao" value="editar" >
+                            <button type="submit">Editar</button>
+                        </form>    
+                    </td>
+                    <td>
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
+                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
+                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                            <input type="hidden" name="opcao" value="excluir" >
+                            <button type="submit">Excluir</button>
+                        </form>    
+                    </td>
                 </tr>
             </c:forEach>
 

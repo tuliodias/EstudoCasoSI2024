@@ -22,20 +22,20 @@ import java.util.List;
  */
 @WebServlet(WebConstantes.BASE_PATH + "/CidadeControlador")
 public class CidadeControlador extends HttpServlet {
-    
+
     private CidadeDao cidadeDao;
     private Cidade cidade;
     String codigoCidade = "";
     String nomeCidade = "";
     String ufCidade = "";
     String opcao = "";
-    
+
     @Override
     public void init() throws ServletException {
         cidadeDao = new CidadeDao();
         cidade = new Cidade();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -46,28 +46,61 @@ public class CidadeControlador extends HttpServlet {
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
-            cadastrar(request,response);
-            
+            switch (opcao) {
+                case "cadastrar":  cadastrar(request, response); break;
+                case "editar":  editar(request, response); break;
+                case "confirmarEditar":  confirmarEditar(request, response); break;
+                case "cancelar":  cancelar(request, response); break;
+                default:
+                    throw new IllegalArgumentException("Opção inválida"+opcao);
+            }
+          
+
         } catch (NumberFormatException e) {
             response.getWriter().println("Erro: um ou mais parâmetros não são numeros válidos");
         } catch (IllegalArgumentException e) {
             response.getWriter().println("Erro: " + e.getMessage());
         }
     }
-    
+
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         cidade.setNomeCidade(nomeCidade);
         cidade.setUfCidade(ufCidade);
         cidadeDao.salvar(cidade);
         encaminharParaPagina(request, response);
     }
-    
+
+    private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("codigoCidade", codigoCidade);
+        request.setAttribute("opcao", "confirmarEditar");
+        request.setAttribute("nomeCidade", nomeCidade);
+        request.setAttribute("ufCidade", ufCidade);
+        request.setAttribute("mensagem", "Edite os dados e clique em salvar");
+        encaminharParaPagina(request, response);
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
+        cidade.setNomeCidade(nomeCidade);
+        cidade.setUfCidade(ufCidade);
+        cidadeDao.alterar(cidade);
+        cancelar(request, response);
+    }
+
+    private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("codigoCidade", "0");
+        request.setAttribute("opcao", "cadastrar");
+        request.setAttribute("nomeCidade", "");
+        request.setAttribute("ufCidade", "");
+        encaminharParaPagina(request, response);
+    }
+
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Cidade> cidades = cidadeDao.buscarTodas();
         request.setAttribute("cidades", cidades);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroCidade.jsp");
         dispatcher.forward(request, response);
-        
+
     }
-    
+
 }
