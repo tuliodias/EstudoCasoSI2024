@@ -3,6 +3,8 @@
     Created on : 8 de jul. de 2024, 21:42:09
     Author     : tulio
 --%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="menu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,5 +23,25 @@
             <input type="submit" value="Salvar" name="Salvar" />
             <input type="submit" value="Cancelar" name="Cancelar" />
         </form>
+
+        <table border="1">
+            <tr>
+                <th>Código</th>
+                <th>Cidade</th>
+                <th>Uf</th>
+            </tr> 
+
+            <c:forEach var="cidade" items="${cidades}">
+                <tr>
+                    <td>${cidade.codigoCidade}</td>
+                    <td>${cidade.nomeCidade}</td>
+                    <td>${cidade.ufCidade}</td>
+                </tr>
+            </c:forEach>
+
+
+
+        </table>
+
     </body>
 </html>
