@@ -66,6 +66,7 @@ public class CidadeControlador extends HttpServlet {
     }
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        validaCampos();
         cidade.setNomeCidade(nomeCidade);
         cidade.setUfCidade(ufCidade);
         cidadeDao.salvar(cidade);
@@ -90,6 +91,7 @@ public class CidadeControlador extends HttpServlet {
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        validaCampos();
         cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
         cidade.setNomeCidade(nomeCidade);
         cidade.setUfCidade(ufCidade);
@@ -115,9 +117,16 @@ public class CidadeControlador extends HttpServlet {
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Cidade> cidades = cidadeDao.buscarTodas();
         request.setAttribute("cidades", cidades);
+        request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroCidade.jsp");
         dispatcher.forward(request, response);
 
+    }
+    
+    public void validaCampos(){
+        if(nomeCidade==null || nomeCidade.isEmpty()|| ufCidade==null || ufCidade.isEmpty()){
+            throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
+        }
     }
 
 }
