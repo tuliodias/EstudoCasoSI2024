@@ -4,8 +4,9 @@
  */
 package com.mycompany.estudocasosi.modelo.dao;
 
-import com.mycompany.estudocasosi.modelo.entidade.Cidade;
+
 import com.mycompany.estudocasosi.modelo.entidade.Funcionario;
+import com.mycompany.estudocasosi.servico.ConverteData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author tulio
  */
 public class FuncionarioDao extends GenericoDAO<Funcionario> {
+    
      
     public void salvar(Funcionario c){
         String insert = "INSERT INTO FUNCIONARIO(NOME,SALARIO,NASCIMENTO,CIDADE) VALUES (?,?,?,?)";
@@ -31,25 +33,28 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
         save(delete, c.getCodigoFuncionario());
     }
     
-    public Cidade buscarPorId(int id){
-        String select = "SELECT * FROM CIDADE WHERE CODIGO=?";
-        return buscarPorId(select, new CidadeRowMapper(), id);
+    public Funcionario buscarPorId(int id){
+        String select = "SELECT * FROM FUNCIONARIO WHERE CODIGO=?";
+        return buscarPorId(select, new FuncionarioRowMapper(), id);
     }
     
-    public List<Cidade> buscarTodas(){
-         String select = "SELECT * FROM CIDADE";
-        return buscarTodos(select, new CidadeRowMapper());
+    public List<Funcionario> buscarTodas(){
+         String select = "SELECT * FROM FUNCIONARIO";
+        return buscarTodos(select, new FuncionarioRowMapper());
     }
     
-    public static class CidadeRowMapper implements RowMapper<Cidade>{
-
+    public static class FuncionarioRowMapper implements RowMapper<Funcionario>{
+       ConverteData converte = new ConverteData();
+       CidadeDao cidadeDao = new CidadeDao();
         @Override
-        public Cidade mapRow(ResultSet rs) throws SQLException {
-            Cidade cidade = new Cidade();
-            cidade.setCodigoCidade(rs.getInt("CODIGO"));
-            cidade.setNomeCidade(rs.getString("NOME"));
-            cidade.setUfCidade(rs.getString("UF"));
-            return cidade;
+        public Funcionario mapRow(ResultSet rs) throws SQLException {
+            Funcionario funcionario = new Funcionario();
+            funcionario.setCodigoFuncionario(rs.getInt("CODIGO"));
+            funcionario.setNomeFuncionario(rs.getString("NOME"));
+            funcionario.setSalarioFuncionario(rs.getDouble("SALARIO"));
+            funcionario.setNascimentoFuncionario(converte.converteCalendario(rs.getDate("NASCIMENTO")));
+            funcionario.setCidadeFuncionario(cidadeDao.buscarPorId(rs.getInt("CODIGO")));
+            return funcionario;
         }
         
     }
