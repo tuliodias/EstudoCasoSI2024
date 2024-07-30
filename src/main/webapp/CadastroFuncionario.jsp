@@ -14,32 +14,38 @@
         <title>JSP Page</title>
     </head>
 
-    <script>
-
-        function submitForm(opcaoValue) {
-
-            document.getElementById("opcao").value = opcaoValue;
-            document.getElementById("cadastroForm").submit();
-        }
-
-
-    </script>
-
 
     <body>
-        <h1>Cadastro Cidade</h1>
+        <h1>Cadastro Funcionário</h1>
         <table>
-            <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+            <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
-                <input type="hidden" name="codigoCidade" value="${codigoCidade}" />
-                <p><label>Cidade:</label> <input type="text" name="nomeCidade" value="${nomeCidade}" size="40" /> </p>
-                <p><label>UF:</label> <input type="text" name="ufCidade" value="${ufCidade}" size="5" /> </p>
+                <input type="hidden" name="codigoFuncionario" value="${codigoFuncionario}" />
+                <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nomeFuncionario}" size="40" /> </p>
+                <p><label>Salário:</label> <input type="number" name="salarioFuncionario" value="${salarioFuncionario}" size="10" /> </p>
+                <p><label>Nascimento:</label> <input type="date" name="nascimentoFuncionario" value="${nascimentoFuncionario}"  /> </p>
+                <p><label>Cidade:</label>
+                    <select name="cidadeFuncionario">
+                        
+                        <c:forEach var="cidade" items="${cidades}">
+                            <c:choose>
+                                <c:when test="${cidade.codigoCidade eq cidadeFuncionario}" >
+                                  <option selected value="${cidade.codigoCidade}">${cidade.nomeCidade}</option>  
+                                </c:when>
+                                <c:otherwise>
+                                 <option  value="${cidade.codigoCidade}">${cidade.nomeCidade}</option>  
+                             </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        
+                    </select>
+                </p>
                 <td> 
                     <input type="submit" value="Salvar" name="Salvar"  /> 
                 </td>
             </form>
 
-            <form  name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+            <form  name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
                 <td>
                     <input type="submit" value="Cancelar" name="Cancelar"  />
                 </td>
@@ -49,35 +55,41 @@
         ${mensagem}
 
         <table border="1">
-            <c:if test="${not empty cidades}">
+            <c:if test="${not empty funcionarios}">
                 <tr>
                     <th>Código</th>
+                    <th>Nome</th>
+                    <th>Salário</th>
+                    <th>Nascimento</th>
                     <th>Cidade</th>
-                    <th>Uf</th>
                     <th>Alterar</th>
                     <th>Excluir</th>
                 </tr> 
             </c:if>
 
-            <c:forEach var="cidade" items="${cidades}">
+            <c:forEach var="funcionario" items="${funcionarios}">
                 <tr>
-                    <td>${cidade.codigoCidade}</td>
-                    <td>${cidade.nomeCidade}</td>
-                    <td>${cidade.ufCidade}</td>
+                    <td>${funcionario.codigoFuncionario}</td>
+                    <td>${funcionario.nomeFuncionario}</td>
+                    <td>${funcionario.salarioFuncionario}</td>
+                    <td>${funcionario.nascimentoFuncionario}</td>
+                    <td>${funcionario.cidadeFuncionario.nomeCidade}</td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
-                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
-                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
-                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
+                            <input type="hidden" name="codigoFuncionario" value="${funcionario.codigoFuncionario}" >
+                            <input type="hidden" name="nomeFuncionario" value="${funcionario.nomeFuncionario}" >
+                            <input type="hidden" name="salarioFuncionario" value="${funcionario.salarioFuncionario}" >
+                            <input type="hidden" name="cidadeFuncionario" value="${funcionario.cidadeFuncionario.nomeCidade}" >
                             <input type="hidden" name="opcao" value="editar" >
                             <button type="submit">Editar</button>
                         </form>    
                     </td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
-                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
-                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
-                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
+                            <input type="hidden" name="codigoFuncionario" value="${funcionario.codigoFuncionario}" >
+                            <input type="hidden" name="nomeFuncionario" value="${funcionario.nomeFuncionario}" >
+                            <input type="hidden" name="salarioFuncionario" value="${funcionario.salarioFuncionario}" >
+                            <input type="hidden" name="cidadeFuncionario" value="${funcionario.cidadeFuncionario.nomeCidade}" >
                             <input type="hidden" name="opcao" value="excluir" >
                             <button type="submit">Excluir</button>
                         </form>    
