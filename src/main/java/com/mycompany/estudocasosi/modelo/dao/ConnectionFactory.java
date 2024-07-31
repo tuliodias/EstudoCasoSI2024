@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/bdestudocasosi";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/estudocaso3sistema";
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "123456";

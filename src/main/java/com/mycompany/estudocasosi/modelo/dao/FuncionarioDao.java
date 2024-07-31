@@ -53,7 +53,7 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
             funcionario.setNomeFuncionario(rs.getString("NOME"));
             funcionario.setSalarioFuncionario(rs.getDouble("SALARIO"));
             funcionario.setNascimentoFuncionario(converte.converteCalendario(rs.getDate("NASCIMENTO")));
-            funcionario.setCidadeFuncionario(cidadeDao.buscarPorId(rs.getInt("CODIGO")));
+            funcionario.setCidadeFuncionario(cidadeDao.buscarPorId(rs.getInt("CIDADE")));
             return funcionario;
         }
         

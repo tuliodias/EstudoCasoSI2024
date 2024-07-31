@@ -4,6 +4,7 @@
  */
 package com.mycompany.estudocasosi.modelo.entidade;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -56,6 +57,12 @@ public class Funcionario {
 
     public void setCidadeFuncionario(Cidade cidadeFuncionario) {
         this.cidadeFuncionario = cidadeFuncionario;
+    }
+    
+     public String getNascimentoFormatado() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(nascimentoFuncionario.getTime());
+
     }
     
     
