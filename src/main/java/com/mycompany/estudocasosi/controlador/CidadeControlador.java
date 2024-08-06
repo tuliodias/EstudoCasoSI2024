@@ -40,6 +40,7 @@ public class CidadeControlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             opcao = request.getParameter("opcao");
+            System.out.println("opção: "+opcao);
             codigoCidade = request.getParameter("codigoCidade");
             nomeCidade = request.getParameter("nomeCidade");
             ufCidade = request.getParameter("ufCidade");
@@ -108,7 +109,7 @@ public class CidadeControlador extends HttpServlet {
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("codigoCidade", "0");
-        request.setAttribute("opcao", "cancelar");
+        request.setAttribute("opcao", "cadastrar");
         request.setAttribute("nomeCidade", "");
         request.setAttribute("ufCidade", "");
         encaminharParaPagina(request, response);

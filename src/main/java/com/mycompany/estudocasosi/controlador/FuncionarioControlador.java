@@ -129,7 +129,7 @@ public class FuncionarioControlador extends HttpServlet {
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("codigoFuncionario", "0");
-        request.setAttribute("opcao", "cancelar");
+        request.setAttribute("opcao", "cadastrar");
         request.setAttribute("nomeFuncionario", "");
         request.setAttribute("salarioFuncionario", "");
         request.setAttribute("nascimentoFuncionario", "");
