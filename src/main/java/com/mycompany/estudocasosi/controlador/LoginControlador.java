@@ -74,8 +74,8 @@ public class LoginControlador extends HttpServlet {
             request.getSession().setAttribute("user", username);
             response.sendRedirect("/estudoCasoSI/index.jsp");
         } else {
-            request.setAttribute("error", "Usuário ou senha inválidos");
-            request.getRequestDispatcher("/estudoCasoSI/login.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Usuário ou senha inválidos");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
 
     }
