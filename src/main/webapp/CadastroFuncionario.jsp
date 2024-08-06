@@ -26,8 +26,8 @@
             <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
                 <input type="hidden" name="codigoFuncionario" value="${codigoFuncionario}" />
-                <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nomeFuncionario}" size="40" /> </p>
-                <p><label>Salário:</label> <input type="number" name="salarioFuncionario" value="${salarioFuncionario}" size="10" /> </p>
+                <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nomeFuncionario}" size="40" required/> </p>
+                <p><label>Salário:</label> <input type="number" name="salarioFuncionario" value="${salarioFuncionario}" size="10" required/> </p>
                 <p><label>Nascimento:</label> <input type="date" name="nascimentoFuncionario" value="${nascimentoFuncionario}"  /> </p>
                 <p><label>Cidade:</label>
                     <select name="cidadeFuncionario">

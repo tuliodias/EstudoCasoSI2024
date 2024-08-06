@@ -108,7 +108,7 @@ public class CidadeControlador extends HttpServlet {
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("codigoCidade", "0");
-        request.setAttribute("opcao", "cadastrar");
+        request.setAttribute("opcao", "cancelar");
         request.setAttribute("nomeCidade", "");
         request.setAttribute("ufCidade", "");
         encaminharParaPagina(request, response);

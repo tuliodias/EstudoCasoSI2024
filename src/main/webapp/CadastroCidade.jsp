@@ -14,16 +14,7 @@
         <title>JSP Page</title>
     </head>
 
-    <script>
-
-        function submitForm(opcaoValue) {
-
-            document.getElementById("opcao").value = opcaoValue;
-            document.getElementById("cadastroForm").submit();
-        }
-
-
-    </script>
+  
 
 
     <body>
@@ -32,8 +23,8 @@
             <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
                 <input type="hidden" name="codigoCidade" value="${codigoCidade}" />
-                <p><label>Cidade:</label> <input type="text" name="nomeCidade" value="${nomeCidade}" size="40" /> </p>
-                <p><label>UF:</label> <input type="text" name="ufCidade" value="${ufCidade}" size="5" /> </p>
+                <p><label>Cidade:</label> <input type="text" name="nomeCidade" value="${nomeCidade}" size="40" required/> </p>
+                <p><label>UF:</label> <input type="text" name="ufCidade" value="${ufCidade}" size="5" required/> </p>
                 <td> 
                     <input type="submit" value="Salvar" name="Salvar"  /> 
                 </td>
