@@ -80,7 +80,7 @@ public class LoginControlador extends HttpServlet {
     }
     
      private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        usuarioDAO.registrarUsuario(username, password);
+        usuarioDAO.registrarUsuario(username, password, email);
         request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
