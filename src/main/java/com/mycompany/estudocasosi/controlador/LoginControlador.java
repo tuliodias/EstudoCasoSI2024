@@ -98,9 +98,9 @@ public class LoginControlador extends HttpServlet {
             session.invalidate(); // Encerra a sessão
              request.setAttribute("mensagem", "Sessão encerrada");
         }
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-        //    dispatcher.forward(request, response);
-        response.sendRedirect("/projetoWEB/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+           dispatcher.forward(request, response);
+        //response.sendRedirect("/projetoWEB/login.jsp");
        
        }
 }

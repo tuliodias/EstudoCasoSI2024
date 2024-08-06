@@ -23,7 +23,7 @@
            <input type="hidden" name="opcao" value="login" />
     </form>
         <p>  <a href="${pageContext.request.contextPath}/CadastroUsuario.jsp">Cadastrar Usuário</a> </p>
-        
+         
     <c:if test="${not empty mensagem}">
         <p>${mensagem}</p>
     </c:if>
